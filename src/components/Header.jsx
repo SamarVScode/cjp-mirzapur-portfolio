@@ -21,7 +21,7 @@ export default function Header() {
   return (
     <>
       {/* ============ TOP STRIP ============ */}
-      <div className="top-strip">
+      <div className={`top-strip${menuOpen ? " menu-is-open" : ""}`}>
         <div className="ticker">
           <span>Party Launch · Volume 1, Edition 1</span><span>Filed under: General Disgruntlement</span>
           <span>Sponsored by no one. Funded by nothing.</span><span>HQ: Wherever the wifi works</span>
@@ -33,7 +33,7 @@ export default function Header() {
       </div>
 
       {/* ============ NAV ============ */}
-      <header className="nav">
+      <header className={`nav${menuOpen ? " menu-is-open" : ""}`}>
         <div className="nav-inner">
           <Link href="/" className="brand" onClick={closeMenu}>
             <span className="brand-logo">
@@ -56,11 +56,11 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="primary-nav" aria-label="Primary">
             <ul>
-              <li><Link href="/#vision">Vision</Link></li>
-              <li><Link href="/#manifesto">Manifesto</Link></li>
-              <li><Link href="/#join">Eligibility</Link></li>
+              <li><Link href="/vision">Vision</Link></li>
+              <li><Link href="/manifesto">Manifesto</Link></li>
+              <li><Link href="/eligibility">Eligibility</Link></li>
               <li><Link href="/complaints">Complaints</Link></li>
-              <li><Link href="/#contact">Contact</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
             </ul>
           </nav>
 
@@ -104,11 +104,11 @@ export default function Header() {
           <nav className="mob-nav-links" aria-label="Mobile Primary">
             <ul>
               {[
-                { href: "/#vision", label: "Vision", num: "01" },
-                { href: "/#manifesto", label: "Manifesto", num: "02" },
-                { href: "/#join", label: "Eligibility", num: "03" },
+                { href: "/vision", label: "Vision", num: "01" },
+                { href: "/manifesto", label: "Manifesto", num: "02" },
+                { href: "/eligibility", label: "Eligibility", num: "03" },
                 { href: "/complaints", label: "Complaints", num: "04" },
-                { href: "/#contact", label: "Contact", num: "05" },
+                { href: "/contact", label: "Contact", num: "05" },
               ].map((item) => (
                 <li key={item.href}>
                   <Link

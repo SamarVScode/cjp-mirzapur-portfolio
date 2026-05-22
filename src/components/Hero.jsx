@@ -42,7 +42,7 @@ export default function Hero() {
         <div className="hero-text">
           <div className="hero-kicker">
             <span className="live-dot"></span>
-            <span>Party Launch · Live since yesterday</span>
+            <span>Party Launch · </span>
           </div>
 
           <h1 className="hero-title">

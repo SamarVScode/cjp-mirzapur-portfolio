@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchComplaints } from "@/lib/firebase";
 
-export default function ComplaintsWall({ refetchTrigger }) {
+export default function ComplaintsWall({ refetchTrigger, limit }) {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +11,11 @@ export default function ComplaintsWall({ refetchTrigger }) {
     setLoading(true);
     try {
       const data = await fetchComplaints();
-      setComplaints(data);
+      if (limit) {
+        setComplaints(data.slice(0, limit));
+      } else {
+        setComplaints(data);
+      }
     } catch (err) {
       console.error("Error loading complaints:", err);
     } finally {

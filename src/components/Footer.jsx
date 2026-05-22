@@ -33,17 +33,17 @@ export default function Footer() {
           <div className="foot-col">
             <h4>The Party</h4>
             <ul>
-              <li><Link href="/#vision">Vision</Link></li>
-              <li><Link href="/#manifesto">Manifesto</Link></li>
-              <li><Link href="/#contact">Founder</Link></li>
+              <li><Link href="/vision">Vision</Link></li>
+              <li><Link href="/manifesto">Manifesto</Link></li>
+              <li><Link href="/contact">Founder</Link></li>
             </ul>
           </div>
           <div className="foot-col">
             <h4>Get involved</h4>
             <ul>
-              <li><Link href="/#join">Eligibility</Link></li>
+              <li><Link href="/eligibility">Eligibility</Link></li>
               <li><Link href="/join">Join the party</Link></li>
-              <li><Link href="/#contact">Volunteer</Link></li>
+              <li><Link href="/contact">Volunteer</Link></li>
             </ul>
           </div>
           <div className="foot-col">
@@ -63,7 +63,7 @@ export default function Footer() {
           <span>© 2026 Cockroach Janta Party · All rants reserved.</span>
           <span className="satire">⚠ A work of satire</span>
           <span className="foot-links">
-            <Link href="/#contact">Privacy</Link> · <Link href="/#contact">Press</Link> · <Link href="/#contact">Contact</Link>
+            <Link href="/contact">Privacy</Link> · <Link href="/contact">Press</Link> · <Link href="/contact">Contact</Link>
           </span>
         </div>
       </div>

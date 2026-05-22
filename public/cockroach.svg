@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- Symmetrical Legs -->
+  <!-- Leg Pair 1 - Left -->
+  <path d="M 104 95 L 76 78 L 51 108 L 65 138" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 104 95 L 76 78" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 69.75 85.5 L 77.816 88.317 M 63.5 93 L 71.566 95.817 M 57.25 100.5 L 65.316 103.317" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  <!-- Leg Pair 1 - Right -->
+  <path d="M 136 95 L 164 78 L 189 108 L 175 138" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 136 95 L 164 78" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 170.25 85.5 L 162.184 88.317 M 176.5 93 L 168.434 95.817 M 182.75 100.5 L 174.684 103.317" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  <!-- Leg Pair 2 - Left -->
+  <path d="M 98 125 L 65 130 L 42 159 L 58 188" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 98 125 L 65 130" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 60.4 135.8 L 68.532 138.421 M 55.8 141.6 L 63.932 144.221 M 51.2 147.4 L 59.332 150.021 M 46.6 153.2 L 54.732 155.821" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  <!-- Leg Pair 2 - Right -->
+  <path d="M 142 125 L 175 130 L 198 159 L 182 188" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 142 125 L 175 130" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 179.6 135.8 L 171.468 138.421 M 184.2 141.6 L 176.068 144.221 M 188.8 147.4 L 180.668 150.021 M 193.4 153.2 L 185.268 155.821" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  <!-- Leg Pair 3 - Left -->
+  <path d="M 100 155 L 68 178 L 64 225 L 84 245" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 100 155 L 68 178" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 67.333 185.833 L 75.559 183.523 M 66.667 193.667 L 74.892 191.356 M 66 201.5 L 74.226 199.189 M 65.333 209.333 L 73.559 207.023 M 64.667 217.167 L 72.892 214.856" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+  <!-- Leg Pair 3 - Right -->
+  <path d="M 140 155 L 172 178 L 176 225 L 156 245" stroke="#0E0D0B" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 140 155 L 172 178" stroke="#0E0D0B" stroke-width="5.6" stroke-linecap="round" fill="none" />
+  <path d="M 172.667 185.833 L 164.441 183.523 M 173.333 193.667 L 165.108 191.356 M 174 201.5 L 165.774 199.189 M 174.667 209.333 L 166.441 207.023 M 175.333 217.167 L 167.108 214.856" stroke="#0E0D0B" stroke-width="1.6" stroke-linecap="round" fill="none" />
+
+  <!-- Cerci -->
+  <path d="M 113 187 Q 105 198, 98 205" stroke="#0E0D0B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  <path d="M 127 187 Q 135 198, 142 205" stroke="#0E0D0B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+  <!-- Symmetrical Wings -->
+  <!-- Left Wing -->
+  <path d="M 98 82 C 88 130, 96 170, 116 188 L 119 188 L 119 82 Z" fill="#0E0D0B" />
+  <!-- Right Wing -->
+  <path d="M 142 82 C 152 130, 144 170, 124 188 L 121 188 L 121 82 Z" fill="#0E0D0B" />
+
+  <!-- Center Wing Split Line -->
+  <line x1="120" y1="82" x2="120" y2="188" stroke="#FAF6EE" stroke-width="2.5" />
+
+  <!-- Pronotum Shield -->
+  <path d="M 96 80 C 94 58, 146 58, 144 80 C 138 85, 102 85, 96 80 Z" fill="#0E0D0B" />
+
+  <!-- Head -->
+  <ellipse cx="120" cy="55" rx="11" ry="8" fill="#0E0D0B" />
+</svg>

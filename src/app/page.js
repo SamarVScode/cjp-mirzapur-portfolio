@@ -3,10 +3,10 @@
 import React from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Vision from "@/components/Vision";
-import Manifesto from "@/components/Manifesto";
 import Footer from "@/components/Footer";
 import ComplaintsWall from "@/components/ComplaintsWall";
+import SwarmStatsDashboard from "@/components/SwarmStatsDashboard";
+import ChronicQueriesFAQ from "@/components/ChronicQueriesFAQ";
 import { joinBannerImage } from "@/lib/assets";
 import Link from "next/link";
 
@@ -17,76 +17,10 @@ export default function Home() {
       
       <main>
         <Hero />
+
+        {/* ============ SWARM STATS DASHBOARD ============ */}
+        <SwarmStatsDashboard />
         
-        {/* ============ SLOGAN MARQUEE ============ */}
-        <div className="marquee">
-          <div className="marquee-track">
-            <span>Together We Survive</span><span className="dot">✦</span>
-            <span>Stronger Together</span><span className="dot">✦</span>
-            <span>Unity · Resilience · Progress</span><span className="dot">✦</span>
-            <span>You Cannot Squash A Movement</span><span className="dot">✦</span>
-            <span>Together We Survive</span><span className="dot">✦</span>
-            <span>Stronger Together</span><span className="dot">✦</span>
-            <span>Unity · Resilience · Progress</span><span className="dot">✦</span>
-            <span>You Cannot Squash A Movement</span><span className="dot">✦</span>
-          </div>
-        </div>
-
-        <Vision />
-        
-        <Manifesto />
-
-        {/* ============ ELIGIBILITY ============ */}
-        <section className="eligibility" id="join" data-screen-label="04 Eligibility">
-          <div className="container">
-            <div className="elig-head">
-              <span className="eyebrow">Membership</span>
-              <h2 className="display">Are you eligible<br />to <em>join?</em></h2>
-              <p className="lead">
-                We do not check religion, caste, or gender. We do, however, have four (4) standards.
-              </p>
-            </div>
-
-            <ul className="checklist">
-              <li>
-                <span className="ck-num">REQ / 01</span>
-                <span className="ck-title">Unemployed</span>
-                <span className="ck-sub">By force, by choice, or by principle. We don't ask.</span>
-                <span className="ck-tick">✓</span>
-              </li>
-              <li>
-                <span className="ck-num">REQ / 02</span>
-                <span className="ck-title">Lazy</span>
-                <span className="ck-sub">Physically only. The brain may continue to spiral.</span>
-                <span className="ck-tick">✓</span>
-              </li>
-              <li>
-                <span className="ck-num">REQ / 03</span>
-                <span className="ck-title">Chronically online</span>
-                <span className="ck-sub">Minimum 11 hours a day, including bathroom breaks.</span>
-                <span className="ck-tick">✓</span>
-              </li>
-              <li>
-                <span className="ck-num">REQ / 04</span>
-                <span className="ck-title">Can rant professionally</span>
-                <span className="ck-sub">As long as the content is sharp, honest, and points at something that actually matters.</span>
-                <span className="ck-tick">✓</span>
-              </li>
-            </ul>
-
-            <div className="elig-cta">
-              <Link href="/join" className="btn-primary btn-primary-lg">
-                Join the Party
-                <span className="arr">→</span>
-              </Link>
-              <p className="elig-fine">
-                Membership is free, lifelong, and revocable only by you.<br />
-                No fees. No selfies with the leader. No "missed call to register."
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* ============ COMPLAINTS WALL SECTION ============ */}
         <section style={{ 
           background: "var(--paper)", 
@@ -94,7 +28,7 @@ export default function Home() {
           borderBottom: "3px solid var(--ink)"
         }}>
           <div className="container">
-            <ComplaintsWall />
+            <ComplaintsWall limit={6} />
             
             <div style={{ textAlign: "center", marginTop: "36px" }}>
               <Link href="/complaints" className="btn-primary btn-primary-lg" style={{ background: "var(--blood)", display: "inline-flex", gap: "10px", alignItems: "center" }}>
@@ -103,6 +37,129 @@ export default function Home() {
               </Link>
             </div>
           </div>
+        </section>
+
+        {/* ============ PROPAGANDA GALLERY SECTION ============ */}
+        <section style={{
+          background: "var(--paper-2)",
+          padding: "80px 0 72px",
+          borderBottom: "3px solid var(--ink)"
+        }}>
+          <div className="container">
+            {/* Gallery notice slip header */}
+            <div style={{
+              background: "var(--paper)",
+              border: "3px solid var(--ink)",
+              boxShadow: "6px 6px 0 var(--ink)",
+              padding: "36px 24px",
+              textAlign: "center",
+              marginBottom: "48px",
+              maxWidth: "800px",
+              marginLeft: "auto",
+              marginRight: "auto"
+            }}>
+              <span className="eyebrow" style={{ color: "var(--green)", marginBottom: "4px" }}>Visual Propaganda</span>
+              <h2 className="display" style={{ fontSize: "38px", margin: "6px 0 12px", textTransform: "uppercase" }}>
+                Swarm <em>Action</em> Posters
+              </h2>
+              <p className="lead" style={{ fontSize: "14.5px", maxWidth: "600px", margin: "0 auto", color: "var(--ink-2)" }}>
+                Official campaign materials printed at our local underground presses. Download, print, and paste them in your neighborhood to spread the word of the swarm.
+              </p>
+            </div>
+
+            {/* Poster Grid */}
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+              gap: "40px",
+              alignItems: "stretch"
+            }}>
+              {/* Poster 1 */}
+              <div className="poster-frame" style={{ 
+                background: "var(--paper)", 
+                border: "3px solid var(--ink)", 
+                boxShadow: "6px 6px 0 var(--ink)",
+                display: "flex", 
+                flexDirection: "column",
+                transition: "all 0.2s ease-out"
+              }}>
+                <div style={{
+                  background: "var(--ink)",
+                  color: "var(--paper)",
+                  padding: "10px 16px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontFamily: "var(--mono)",
+                  fontSize: "11px",
+                  textTransform: "uppercase"
+                }}>
+                  <span>Campaign Poster · No. 002</span>
+                  <span>★ ★ ★</span>
+                </div>
+                <div style={{ padding: "16px", borderBottom: "3px solid var(--ink)", background: "var(--paper-2)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <img
+                    loading="lazy"
+                    src="/images/swarm_action_poster.png"
+                    alt="CJP Campaign Poster No. 002 — You Cannot Step On A Swarm"
+                    style={{ width: "100%", height: "auto", border: "2px solid var(--ink)" }}
+                  />
+                </div>
+                <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "8px", flexGrow: "1" }}>
+                  <span className="eyebrow" style={{ color: "var(--saffron-deep)", marginBottom: 0, fontSize: "10px" }}>PROTEST / RALLY</span>
+                  <h4 style={{ fontFamily: "var(--condensed)", fontSize: "20px", margin: 0, textTransform: "uppercase" }}>"You Cannot Squash A Swarm"</h4>
+                  <p style={{ fontSize: "13.5px", color: "var(--ink-2)", margin: 0, lineHeight: "1.45" }}>
+                    Our official Mirzapur wing's launch poster. Features the resilient cockroach standing tall against administrative pressure.
+                  </p>
+                </div>
+              </div>
+
+              {/* Poster 2 */}
+              <div className="poster-frame" style={{ 
+                background: "var(--paper)", 
+                border: "3px solid var(--ink)", 
+                boxShadow: "6px 6px 0 var(--ink)",
+                display: "flex", 
+                flexDirection: "column",
+                transition: "all 0.2s ease-out"
+              }}>
+                <div style={{
+                  background: "var(--ink)",
+                  color: "var(--paper)",
+                  padding: "10px 16px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontFamily: "var(--mono)",
+                  fontSize: "11px",
+                  textTransform: "uppercase"
+                }}>
+                  <span>Chai stall banner · No. 003</span>
+                  <span>★ ★ ★</span>
+                </div>
+                <div style={{ padding: "16px", borderBottom: "3px solid var(--ink)", background: "var(--paper-2)", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <img
+                    loading="lazy"
+                    src="/images/chai_stall_banner.png"
+                    alt="CJP Tea Stall panoramic banner No. 003 — Local Grievance Summit"
+                    style={{ width: "100%", height: "auto", border: "2px solid var(--ink)" }}
+                  />
+                </div>
+                <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "8px", flexGrow: "1" }}>
+                  <span className="eyebrow" style={{ color: "var(--green)", marginBottom: 0, fontSize: "10px" }}>DISCUSSION / DEBATE</span>
+                  <h4 style={{ fontFamily: "var(--condensed)", fontSize: "20px", margin: 0, textTransform: "uppercase" }}>"Tea Stall Summit"</h4>
+                  <p style={{ fontSize: "13.5px", color: "var(--ink-2)", margin: 0, lineHeight: "1.45" }}>
+                    Panoramic graphic showcasing CJP members gathering for policy debates and chai across local stalls in the district.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <style jsx>{`
+            .poster-frame:hover {
+              transform: translateY(-4px);
+              box-shadow: 9px 9px 0 var(--ink) !important;
+            }
+          `}</style>
         </section>
 
         {/* ============ JOIN BANNER ============ */}
@@ -114,6 +171,9 @@ export default function Home() {
             alt="Stronger Together — Become a Member of the Cockroach Janta Party"
           />
         </section>
+
+        {/* ============ CHRONIC QUERIES FAQ ============ */}
+        <ChronicQueriesFAQ />
 
         {/* ============ CONTACT ============ */}
         <section className="contact" id="contact" data-screen-label="06 Contact">
