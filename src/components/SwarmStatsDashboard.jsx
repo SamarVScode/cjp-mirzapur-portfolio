@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { fetchStats } from "@/lib/firebase";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function SwarmStatsDashboard() {
+  const { t, language } = useLanguage();
   const [stats, setStats] = useState({ memberCount: 0, complaintCount: 0 });
 
   useEffect(() => {
@@ -22,31 +24,31 @@ export default function SwarmStatsDashboard() {
 
   const statCards = [
     {
-      kicker: "Coefficient / 01",
-      value: "99.9%",
-      label: "Swarm Laziness Coefficient",
-      desc: "Scientifically measured coefficient of procrastination. We move only when absolutely pushed.",
+      kicker: language === "en" ? "Coefficient / 01" : "गुणांक / ०१",
+      value: t("stat_laziness_val"),
+      label: t("stat_laziness_title"),
+      desc: t("stat_laziness_desc"),
       color: "var(--saffron)"
     },
     {
-      kicker: "Fuel / 02",
-      value: "14,890+",
-      label: "Cups of Chai Consumed",
-      desc: "Daily average required to sustain passionate debates at local tea stalls across Mirzapur.",
+      kicker: language === "en" ? "Fuel / 02" : "ईंधन / ०२",
+      value: t("stat_chai_val"),
+      label: t("stat_chai_title"),
+      desc: t("stat_chai_desc"),
       color: "var(--green)"
     },
     {
-      kicker: "Finance / 03",
-      value: "0.00 INR",
-      label: "Corporate Funding Secured",
-      desc: "Proudly sponsored by absolutely no one. 100% pure, unadulterated middle-class frustration.",
+      kicker: language === "en" ? "Finance / 03" : "वित्त / ०३",
+      value: t("stat_funds_val"),
+      label: t("stat_funds_title"),
+      desc: t("stat_funds_desc"),
       color: "var(--blood)"
     },
     {
-      kicker: "Activity / 04",
-      value: "8,450+",
-      label: "Disgruntled Tweets & Memes",
-      desc: "Active grievance venting on social media to keep administrative clerks thoroughly annoyed.",
+      kicker: language === "en" ? "Activity / 04" : "गतिविधि / ०४",
+      value: t("stat_rants_val"),
+      label: t("stat_rants_title"),
+      desc: t("stat_rants_desc"),
       color: "var(--gold)"
     }
   ];
@@ -70,12 +72,16 @@ export default function SwarmStatsDashboard() {
           marginLeft: "auto",
           marginRight: "auto"
         }}>
-          <span className="eyebrow" style={{ color: "var(--saffron-deep)", marginBottom: "4px" }}>Divisional Metrics</span>
+          <span className="eyebrow" style={{ color: "var(--saffron-deep)", marginBottom: "4px" }}>{t("stats_eyebrow")}</span>
           <h2 className="display" style={{ fontSize: "38px", margin: "6px 0 12px", textTransform: "uppercase" }}>
-            Swarm Dashboard of <em>Lethargy</em>
+            {language === "en" ? (
+              <>Swarm Dashboard of <em>Lethargy</em></>
+            ) : (
+              t("stats_title")
+            )}
           </h2>
           <p className="lead" style={{ fontSize: "15px", maxWidth: "680px", margin: "0 auto", color: "var(--ink-2)" }}>
-            While other parties present tall growth promises, we believe in mathematical transparency. Behold the real-time indicators of our collective inaction.
+            {t("stats_desc")}
           </p>
         </div>
 
@@ -99,9 +105,9 @@ export default function SwarmStatsDashboard() {
             alignItems: "center",
             gap: "4px"
           }}>
-            <span className="eyebrow" style={{ color: "var(--green)", marginBottom: 0, fontSize: "10px" }}>REGISTERED MEMBERS</span>
+            <span className="eyebrow" style={{ color: "var(--green)", marginBottom: 0, fontSize: "10px" }}>{t("stat_members_val")}</span>
             <span style={{ fontFamily: "var(--display)", fontSize: "28px" }}>
-              {stats.memberCount ? stats.memberCount.toLocaleString("en-IN") : "4,289+"}
+              {stats.memberCount ? stats.memberCount.toLocaleString(language === "en" ? "en-IN" : "hi-IN") : "4,289+"}
             </span>
           </div>
           <div style={{
@@ -114,9 +120,9 @@ export default function SwarmStatsDashboard() {
             alignItems: "center",
             gap: "4px"
           }}>
-            <span className="eyebrow" style={{ color: "var(--blood)", marginBottom: 0, fontSize: "10px" }}>VAULT COMPLAINTS FILED</span>
+            <span className="eyebrow" style={{ color: "var(--blood)", marginBottom: 0, fontSize: "10px" }}>{t("stat_complaints_val")}</span>
             <span style={{ fontFamily: "var(--display)", fontSize: "28px" }}>
-              {stats.complaintCount ? stats.complaintCount.toLocaleString("en-IN") : "891+"}
+              {stats.complaintCount ? stats.complaintCount.toLocaleString(language === "en" ? "en-IN" : "hi-IN") : "891+"}
             </span>
           </div>
         </div>

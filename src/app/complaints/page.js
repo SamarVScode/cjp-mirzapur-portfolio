@@ -6,10 +6,57 @@ import Footer from "@/components/Footer";
 import ComplaintForm from "@/components/ComplaintForm";
 import ComplaintsWall from "@/components/ComplaintsWall";
 import { fetchStats } from "@/lib/firebase";
+import { useLanguage } from "@/context/LanguageContext";
+
+const localDict = {
+  en: {
+    bureau: "Bureau of Frustrations",
+    speak_truth: "Speak Truth",
+    to_laziness: "to Laziness.",
+    bureau_desc: "Welcome to the official Mirzapur District Grievance Center. Our administrative capacity is mathematically capped at zero percent response rate, but your complaints keep the swarm alive!",
+    swarm_members: "SWARM MEMBERS",
+    complaints_filed: "COMPLAINTS FILED",
+    division_status: "Division Status",
+    vent_frustration: "Vent your frustration.",
+    frustration_desc: "Is the electricity gone again? Educational system crumbled? Inflation through the roof? Write it down. We promise to read it, print it, and file it in our Action Chamber. Venting keeps the spirit alive.",
+    bureau_status_label: "Bureau Status",
+    bureau_status_val: "OVERLOADED WITH RANTS",
+    cjp_action_label: "CJP Action",
+    cjp_action_val: "Every complaint is mathematically cataloged.",
+    govt_ignoring_label: "Govt Ignoring",
+    govt_ignoring_val: "100% Guaranteed",
+    swarm_duty_label: "Swarm Duty",
+    speak_truth_val: "Speak Truth to Laziness",
+    keep_friction: "Keep the friction going."
+  },
+  hi: {
+    bureau: "हताशा ब्यूरो",
+    speak_truth: "सच्चाई कहें",
+    to_laziness: "सुस्ती के सामने।",
+    bureau_desc: "आधिकारिक मिर्ज़ापुर जिला शिकायत केंद्र में आपका स्वागत है। हमारी प्रशासनिक क्षमता गणितीय रूप से शून्य प्रतिशत प्रतिक्रिया दर पर सीमित है, लेकिन आपकी शिकायतें झुंड को जीवित रखती हैं!",
+    swarm_members: "पंजीकृत सदस्य",
+    complaints_filed: "दर्ज शिकायतें",
+    division_status: "डिवीजन की स्थिति",
+    vent_frustration: "अपनी भड़ास निकालें।",
+    frustration_desc: "क्या बिजली फिर चली गई? शिक्षा व्यवस्था चरमरा गई? महंगाई आसमान छू रही है? इसे लिख लें। हम इसे पढ़ने, इसे प्रिंट करने और हमारे एक्शन चैंबर में दर्ज करने का वादा करते हैं। भड़ास निकालने से हौसला बना रहता है।",
+    bureau_status_label: "ब्यूरो की स्थिति",
+    bureau_status_val: "रेंट्स से ओवरलोडेड",
+    cjp_action_label: "सीजेपी कार्रवाई",
+    cjp_action_val: "हर शिकायत गणितीय रूप से सूचीबद्ध है।",
+    govt_ignoring_label: "सरकार का नजरअंदाज करना",
+    govt_ignoring_val: "१००% निश्चित",
+    swarm_duty_label: "झुंड का कर्तव्य",
+    speak_truth_val: "सुस्ती के सामने सच बोलना",
+    keep_friction: "घर्षण जारी रखें।"
+  }
+};
 
 export default function ComplaintsPage() {
+  const { language } = useLanguage();
   const [refetchTrigger, setRefetchTrigger] = useState(0);
   const [stats, setStats] = useState({ memberCount: 0, complaintCount: 0 });
+
+  const text = localDict[language] || localDict.en;
 
   const loadStats = async () => {
     try {
@@ -56,12 +103,19 @@ export default function ComplaintsPage() {
           }}></div>
 
           <div className="container">
-            <span className="eyebrow" style={{ color: "var(--saffron-2)", marginBottom: "8px" }}>Bureau of Frustrations</span>
+            <span className="eyebrow" style={{ color: "var(--saffron-2)", marginBottom: "8px" }}>
+              {text.bureau}
+            </span>
             <h1 className="display" style={{ color: "var(--paper)", fontSize: "clamp(38px, 6vw, 68px)", lineHeight: "0.95" }}>
-              Speak Truth<br />to <em>Laziness.</em>
+              {text.speak_truth}<br />
+              {language === "en" ? (
+                <>to <em>Laziness.</em></>
+              ) : (
+                <>सुस्ती के <em>सामने।</em></>
+              )}
             </h1>
             <p className="lead" style={{ color: "rgba(244, 235, 215, 0.8)", maxWidth: "600px", marginTop: "16px", fontSize: "16px" }}>
-              Welcome to the official Mirzapur District Grievance Center. Our administrative capacity is mathematically capped at zero percent response rate, but your complaints keep the swarm alive!
+              {text.bureau_desc}
             </p>
 
             {/* Real-time Stats Grid */}
@@ -79,9 +133,11 @@ export default function ComplaintsPage() {
                 flexDirection: "column",
                 gap: "2px"
               }}>
-                <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", letterSpacing: "1.5px", color: "rgba(244, 235, 215, 0.5)", fontWeight: "600" }}>SWARM MEMBERS</span>
+                <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", letterSpacing: "1.5px", color: "rgba(244, 235, 215, 0.5)", fontWeight: "600" }}>
+                  {text.swarm_members}
+                </span>
                 <span style={{ fontSize: "28px", fontFamily: "var(--font-condensed)", fontWeight: "bold", color: "var(--paper)", letterSpacing: "1.5px" }}>
-                  {stats.memberCount.toLocaleString("en-IN")}
+                  {stats.memberCount.toLocaleString(language === "en" ? "en-IN" : "hi-IN")}
                 </span>
               </div>
               <div style={{
@@ -92,9 +148,11 @@ export default function ComplaintsPage() {
                 flexDirection: "column",
                 gap: "2px"
               }}>
-                <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", letterSpacing: "1.5px", color: "rgba(244, 235, 215, 0.5)", fontWeight: "600" }}>COMPLAINTS FILED</span>
+                <span style={{ fontSize: "10px", fontFamily: "var(--font-mono)", letterSpacing: "1.5px", color: "rgba(244, 235, 215, 0.5)", fontWeight: "600" }}>
+                  {text.complaints_filed}
+                </span>
                 <span style={{ fontSize: "28px", fontFamily: "var(--font-condensed)", fontWeight: "bold", color: "var(--paper)", letterSpacing: "1.5px" }}>
-                  {stats.complaintCount.toLocaleString("en-IN")}
+                  {stats.complaintCount.toLocaleString(language === "en" ? "en-IN" : "hi-IN")}
                 </span>
               </div>
             </div>
@@ -107,30 +165,38 @@ export default function ComplaintsPage() {
             <div className="contact-grid">
               {/* Left Column: Satirical Info */}
               <div className="contact-text">
-                <span className="eyebrow" style={{ color: "var(--blood)", marginBottom: "12px" }}>Division Status</span>
-                <h2 className="display" style={{ fontSize: "36px", lineHeight: "1" }}>Vent your<br /><em>frustration.</em></h2>
+                <span className="eyebrow" style={{ color: "var(--blood)", marginBottom: "12px" }}>
+                  {text.division_status}
+                </span>
+                <h2 className="display" style={{ fontSize: "36px", lineHeight: "1" }}>
+                  {language === "en" ? (
+                    <>Vent your<br /><em>frustration.</em></>
+                  ) : (
+                    <>अपनी भड़ास<br /><em>निकालें।</em></>
+                  )}
+                </h2>
                 <p className="lead" style={{ fontSize: "15px", marginTop: "14px", color: "var(--ink-2)" }}>
-                  Is the electricity gone again? Educational system crumbled? Inflation through the roof? Write it down. We promise to read it, print it, and file it in our Action Chamber. Venting keeps the spirit alive.
+                  {text.frustration_desc}
                 </p>
 
                 <ul className="contact-meta" style={{ marginTop: "28px" }}>
                   <li>
-                    <span className="cm-label">Bureau Status</span>
-                    <span className="cm-value" style={{ color: "var(--blood)" }}>OVERLOADED WITH RANTS</span>
+                    <span className="cm-label">{text.bureau_status_label}</span>
+                    <span className="cm-value" style={{ color: "var(--blood)" }}>{text.bureau_status_val}</span>
                   </li>
                   <li>
-                    <span className="cm-label">CJP Action</span>
-                    <span className="cm-value">Every complaint is mathematically cataloged.</span>
+                    <span className="cm-label">{text.cjp_action_label}</span>
+                    <span className="cm-value">{text.cjp_action_val}</span>
                   </li>
                   <li>
-                    <span className="cm-label">Govt Ignoring</span>
-                    <span className="cm-value">100% Guaranteed</span>
+                    <span className="cm-label">{text.govt_ignoring_label}</span>
+                    <span className="cm-value">{text.govt_ignoring_val}</span>
                   </li>
                   <li>
-                    <span className="cm-label">Swarm Duty</span>
+                    <span className="cm-label">{text.swarm_duty_label}</span>
                     <span className="cm-value">
-                      Speak Truth to Laziness
-                      <span className="cm-foot">Keep the friction going.</span>
+                      {text.speak_truth_val}
+                      <span className="cm-foot">{text.keep_friction}</span>
                     </span>
                   </li>
                 </ul>

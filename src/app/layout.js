@@ -1,5 +1,7 @@
 import { Bowlby_One, Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/context/LanguageContext";
+
 
 const bowlbyOne = Bowlby_One({
   weight: "400",
@@ -57,7 +59,9 @@ export default function RootLayout({ children }) {
       className={`${bowlbyOne.variable} ${oswald.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body className="body-noise">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

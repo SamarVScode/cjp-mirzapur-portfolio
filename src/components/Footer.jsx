@@ -2,8 +2,11 @@
 
 import React from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="footer">
       <div className="footer-top container">
@@ -20,34 +23,33 @@ export default function Footer() {
             </span>
             <span className="brand-text">
               <span className="brand-name">COCKROACH<br />JANTA PARTY</span>
-              <span className="brand-tag">कॉकरोच जनता पार्टी</span>
+              <span className="brand-tag">{t("footer_party") === "The Party" ? "कॉकरोच जनता पार्टी" : "कॉकरोच जनता पार्टी"}</span>
             </span>
           </div>
           <p className="foot-blurb">
-            A political party for the lazy, the unemployed, and the chronically correct.
-            Headquartered wherever the wifi works.
+            {t("footer_blurb")}
           </p>
         </div>
 
         <div className="foot-cols">
           <div className="foot-col">
-            <h4>The Party</h4>
+            <h4>{t("footer_party")}</h4>
             <ul>
-              <li><Link href="/vision">Vision</Link></li>
-              <li><Link href="/manifesto">Manifesto</Link></li>
-              <li><Link href="/contact">Founder</Link></li>
+              <li><Link href="/vision">{t("nav_vision")}</Link></li>
+              <li><Link href="/manifesto">{t("nav_manifesto")}</Link></li>
+              <li><Link href="/contact">{t("contact_founder_title")}</Link></li>
             </ul>
           </div>
           <div className="foot-col">
-            <h4>Get involved</h4>
+            <h4>{t("footer_get_involved")}</h4>
             <ul>
-              <li><Link href="/eligibility">Eligibility</Link></li>
-              <li><Link href="/join">Join the party</Link></li>
-              <li><Link href="/contact">Volunteer</Link></li>
+              <li><Link href="/eligibility">{t("nav_eligibility")}</Link></li>
+              <li><Link href="/join">{t("nav_join")}</Link></li>
+              <li><Link href="/contact">{t("footer_volunteer")}</Link></li>
             </ul>
           </div>
           <div className="foot-col">
-            <h4>Follow</h4>
+            <h4>{t("footer_follow")}</h4>
             <ul>
               <li><a href="https://x.com" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
               <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
@@ -60,10 +62,10 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <div className="container fb-inner">
-          <span>© 2026 Cockroach Janta Party · All rants reserved.</span>
-          <span className="satire">⚠ A work of satire</span>
+          <span>{t("footer_copyright")}</span>
+          <span className="satire">{t("footer_satire")}</span>
           <span className="foot-links">
-            <Link href="/contact">Privacy</Link> · <Link href="/contact">Press</Link> · <Link href="/contact">Contact</Link>
+            <Link href="/contact">{t("footer_privacy")}</Link> · <Link href="/contact">{t("footer_press")}</Link> · <Link href="/contact">{t("nav_contact")}</Link>
           </span>
         </div>
       </div>

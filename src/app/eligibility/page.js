@@ -4,8 +4,11 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function EligibilityPage() {
+  const { t, language } = useLanguage();
+
   return (
     <>
       <Header />
@@ -28,12 +31,16 @@ export default function EligibilityPage() {
             pointerEvents: "none"
           }}></div>
           <div className="container">
-            <span className="eyebrow" style={{ color: "var(--green-light)", marginBottom: "8px" }}>Swarm Quality Standards</span>
-            <h1 className="display" style={{ color: "var(--paper)", fontSize: "clamp(38px, 6vw, 68px)", lineHeight: "0.95" }}>
-              Are you <em>Eligible?</em>
+            <span className="eyebrow" style={{ color: "var(--green-light)", marginBottom: "8px" }}>{t("elig_eyebrow")}</span>
+            <h1 className="display" style={{ color: "var(--paper)", fontSize: "clamp(28px, 6vw, 68px)", lineHeight: "0.95" }}>
+              {language === "en" ? (
+                <>Are you <em>Eligible?</em></>
+              ) : (
+                t("elig_title")
+              )}
             </h1>
             <p className="lead" style={{ color: "rgba(244, 235, 215, 0.8)", maxWidth: "600px", marginTop: "16px", fontSize: "16px" }}>
-              Before joining the Cockroach Janta Party, please verify that you satisfy our four (4) core criteria.
+              {t("elig_desc")}
             </p>
           </div>
         </section>
@@ -43,38 +50,38 @@ export default function EligibilityPage() {
           <div className="container">
             <ul className="checklist">
               <li>
-                <span className="ck-num">REQ / 01</span>
-                <span className="ck-title">Unemployed</span>
-                <span className="ck-sub">By force, by choice, or by principle. We don't ask.</span>
+                <span className="ck-num">{t("elig_req_01_num")}</span>
+                <span className="ck-title">{t("elig_req_01_title")}</span>
+                <span className="ck-sub">{t("elig_req_01_desc")}</span>
                 <span className="ck-tick">✓</span>
               </li>
               <li>
-                <span className="ck-num">REQ / 02</span>
-                <span className="ck-title">Lazy</span>
-                <span className="ck-sub">Physically only. The brain may continue to spiral.</span>
+                <span className="ck-num">{t("elig_req_02_num")}</span>
+                <span className="ck-title">{t("elig_req_02_title")}</span>
+                <span className="ck-sub">{t("elig_req_02_desc")}</span>
                 <span className="ck-tick">✓</span>
               </li>
               <li>
-                <span className="ck-num">REQ / 03</span>
-                <span className="ck-title">Chronically online</span>
-                <span className="ck-sub">Minimum 11 hours a day, including bathroom breaks.</span>
+                <span className="ck-num">{t("elig_req_03_num")}</span>
+                <span className="ck-title">{t("elig_req_03_title")}</span>
+                <span className="ck-sub">{t("elig_req_03_desc")}</span>
                 <span className="ck-tick">✓</span>
               </li>
               <li>
-                <span className="ck-num">REQ / 04</span>
-                <span className="ck-title">Can rant professionally</span>
-                <span className="ck-sub">As long as the content is sharp, honest, and points at something that actually matters.</span>
+                <span className="ck-num">{t("elig_req_04_num")}</span>
+                <span className="ck-title">{t("elig_req_04_title")}</span>
+                <span className="ck-sub">{t("elig_req_04_desc")}</span>
                 <span className="ck-tick">✓</span>
               </li>
             </ul>
 
             <div className="elig-cta" style={{ marginTop: "48px", textAlign: "center" }}>
               <Link href="/join" className="btn-primary btn-primary-lg">
-                Join the Party
+                {t("btn_join_swarm")}
                 <span className="arr">→</span>
               </Link>
               <p className="elig-fine" style={{ marginTop: "12px" }}>
-                Membership is free, lifelong, and revocable only by you.
+                {t("elig_cta_fine")}
               </p>
             </div>
           </div>

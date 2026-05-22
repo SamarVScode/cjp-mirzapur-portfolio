@@ -225,6 +225,34 @@ button { cursor: pointer; border: none; background: none; }
   transform: translate(-2px, -2px);
   box-shadow: 4px 4px 0 var(--ink);
 }
+.lang-toggle-btn {
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.lang-toggle-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--paper);
+}
+.lang-toggle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
 .hero {
   position: relative;
   border-bottom: 3px solid var(--ink);
@@ -419,6 +447,7 @@ button { cursor: pointer; border: none; background: none; }
 @media (max-width: 640px) {
   .btn-petition { padding: 10px 14px 10px 12px; }
   .btn-petition-main { font-size: 11px; }
+  .display { font-size: clamp(28px, 8vw, 44px) !important; }
 }
 .hero-strip {
   display: grid;
@@ -1163,6 +1192,10 @@ button { cursor: pointer; border: none; background: none; }
   .cm-value {
     font-size: 14.5px;
   }
+  .lang-toggle-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
 }
 
 /* Next.js structural compatibility class */
@@ -1633,6 +1666,26 @@ button { cursor: pointer; border: none; background: none; }
 @media (max-width: 480px) {
   .mob-nav-inner { padding: 40px 24px 32px; }
   .mob-nav-stamp { display: none; }
+  
+  .contact-form {
+    width: calc(100% - 10px) !important;
+    box-shadow: 6px 6px 0 var(--ink) !important;
+  }
+  .success-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .success-actions .btn-primary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+    font-size: 13px !important;
+  }
+  .success-actions .btn-link {
+    align-self: center !important;
+    margin-top: 4px;
+  }
 }
 
 

@@ -4,8 +4,25 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Vision from "@/components/Vision";
+import { useLanguage } from "@/context/LanguageContext";
+
+const localDict = {
+  en: {
+    ideology: "The Swarm Ideology",
+    vision: "Our Vision.",
+    vision_desc: "The CJP isn't here to win power to enrich ourselves. We are here to give voice to the disgruntled, lazy, and chronically online youth."
+  },
+  hi: {
+    ideology: "झुंड की विचारधारा",
+    vision: "हमारा विज़न।",
+    vision_desc: "सीजेपी यहाँ खुद को समृद्ध करने के लिए सत्ता जीतने नहीं आई है। हम यहाँ हताश, आलसी और क्रॉनिकली ऑनलाइन युवाओं को आवाज़ देने के लिए हैं।"
+  }
+};
 
 export default function VisionPage() {
+  const { language } = useLanguage();
+  const text = localDict[language] || localDict.en;
+
   return (
     <>
       <Header />
@@ -29,12 +46,18 @@ export default function VisionPage() {
             pointerEvents: "none"
           }}></div>
           <div className="container">
-            <span className="eyebrow" style={{ color: "var(--saffron-2)", marginBottom: "8px" }}>The Swarm Ideology</span>
+            <span className="eyebrow" style={{ color: "var(--saffron-2)", marginBottom: "8px" }}>
+              {text.ideology}
+            </span>
             <h1 className="display" style={{ color: "var(--paper)", fontSize: "clamp(38px, 6vw, 68px)", lineHeight: "0.95" }}>
-              Our <em>Vision.</em>
+              {language === "en" ? (
+                <>Our <em>Vision.</em></>
+              ) : (
+                <>हमारा <em>विज़न।</em></>
+              )}
             </h1>
             <p className="lead" style={{ color: "rgba(244, 235, 215, 0.8)", maxWidth: "600px", marginTop: "16px", fontSize: "16px" }}>
-              The CJP isn't here to win power to enrich ourselves. We are here to give voice to the disgruntled, lazy, and chronically online youth.
+              {text.vision_desc}
             </p>
           </div>
         </section>

@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Header() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Lock body scroll when menu is open
@@ -56,28 +58,37 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="primary-nav" aria-label="Primary">
             <ul>
-              <li><Link href="/vision">Vision</Link></li>
-              <li><Link href="/manifesto">Manifesto</Link></li>
-              <li><Link href="/eligibility">Eligibility</Link></li>
-              <li><Link href="/complaints">Complaints</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/vision">{t("nav_vision")}</Link></li>
+              <li><Link href="/manifesto">{t("nav_manifesto")}</Link></li>
+              <li><Link href="/eligibility">{t("nav_eligibility")}</Link></li>
+              <li><Link href="/complaints">{t("nav_complaints")}</Link></li>
+              <li><Link href="/contact">{t("nav_contact")}</Link></li>
             </ul>
           </nav>
 
-          <Link href="/join" className="btn-pill desktop-join-btn">Join the Party</Link>
+          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+            <button
+              onClick={toggleLanguage}
+              className="lang-toggle-btn"
+              aria-label="Switch Language"
+            >
+              {language === "en" ? "हिंदी" : "EN"}
+            </button>
+            <Link href="/join" className="btn-pill desktop-join-btn">{t("nav_join")}</Link>
 
-          {/* Hamburger Button — mobile only */}
-          <button
-            className={`hamburger${menuOpen ? " is-open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            id="mobile-menu-toggle"
-          >
-            <span className="ham-line"></span>
-            <span className="ham-line"></span>
-            <span className="ham-line"></span>
-          </button>
+            {/* Hamburger Button — mobile only */}
+            <button
+              className={`hamburger${menuOpen ? " is-open" : ""}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              id="mobile-menu-toggle"
+            >
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+              <span className="ham-line"></span>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -104,11 +115,11 @@ export default function Header() {
           <nav className="mob-nav-links" aria-label="Mobile Primary">
             <ul>
               {[
-                { href: "/vision", label: "Vision", num: "01" },
-                { href: "/manifesto", label: "Manifesto", num: "02" },
-                { href: "/eligibility", label: "Eligibility", num: "03" },
-                { href: "/complaints", label: "Complaints", num: "04" },
-                { href: "/contact", label: "Contact", num: "05" },
+                { href: "/vision", label: t("nav_vision"), num: "01" },
+                { href: "/manifesto", label: t("nav_manifesto"), num: "02" },
+                { href: "/eligibility", label: t("nav_eligibility"), num: "03" },
+                { href: "/complaints", label: t("nav_complaints"), num: "04" },
+                { href: "/contact", label: t("nav_contact"), num: "05" },
               ].map((item) => (
                 <li key={item.href}>
                   <Link
@@ -132,7 +143,7 @@ export default function Header() {
               className="mob-nav-cta"
               onClick={closeMenu}
             >
-              Join the Party
+              {t("nav_join")}
               <span>→</span>
             </Link>
             <p className="mob-nav-fine">Free · Lifelong · No fees. No selfies.</p>

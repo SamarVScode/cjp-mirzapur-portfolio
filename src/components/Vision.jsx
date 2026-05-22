@@ -2,23 +2,32 @@
 
 import React from "react";
 import { visionImage } from "../lib/assets";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Vision() {
+  const { t, language } = useLanguage();
+
   return (
     <section className="vision" id="vision" data-screen-label="02 Vision">
       <div className="container">
         <div className="vision-grid">
           <div className="vision-side">
-            <span className="eyebrow">Chapter One</span>
-            <h2 className="display">Our Movement's<br /><em>Vision.</em></h2>
+            <span className="eyebrow">{t("vision_eyebrow")}</span>
+            <h2 className="display">
+              {language === "en" ? (
+                <>Our Movement's<br /><em>Vision.</em></>
+              ) : (
+                t("vision_title")
+              )}
+            </h2>
             <p className="lead">
-              We are not here to set up another PM CARES, holiday in Davos on the taxpayer's salary slip, or rebrand corruption as "strategic spending." We are here to ask — loudly, repeatedly, in writing — where the money went.
+              {t("vision_desc")}
             </p>
 
             <div className="mission-card">
-              <span className="mc-label">Our Mission</span>
+              <span className="mc-label">{t("vision_mission_label")}</span>
               <p>
-                Build a party for the young people who keep getting called lazy, chronically online, and — most recently — cockroaches. That's it. That's the mission. The rest is satire.
+                {t("vision_mission_desc")}
               </p>
             </div>
           </div>
@@ -31,7 +40,7 @@ export default function Vision() {
               alt="Cockroach Janta Party banner with the crowd raising fists"
             />
             <div className="vi-caption">
-              <span>Rally · The People's Banner</span>
+              <span>{t("vision_caption_title")}</span>
               <span>16 . 05 . 2026</span>
             </div>
           </aside>
