@@ -9,7 +9,7 @@ import { fetchStats } from "@/lib/firebase";
 
 export default function ComplaintsPage() {
   const [refetchTrigger, setRefetchTrigger] = useState(0);
-  const [stats, setStats] = useState({ memberCount: 1342, complaintCount: 412 });
+  const [stats, setStats] = useState({ memberCount: 0, complaintCount: 0 });
 
   const loadStats = async () => {
     try {

@@ -174,8 +174,8 @@ export async function fetchStats() {
     const localMembers = JSON.parse(localStorage.getItem("cjp_members") || "[]");
     const localComplaints = JSON.parse(localStorage.getItem("cjp_complaints") || "[]");
     
-    const baseMemberCount = 1342;
-    const baseComplaintCount = 412;
+    const baseMemberCount = 0;
+    const baseComplaintCount = 0;
     
     return {
       memberCount: baseMemberCount + localMembers.length,
@@ -183,7 +183,7 @@ export async function fetchStats() {
     };
   } catch (e) {
     console.error("Error reading local stats:", e);
-    return { memberCount: 1342, complaintCount: 412 };
+    return { memberCount: 0, complaintCount: 0 };
   }
 }
 
