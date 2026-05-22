@@ -1,0 +1,278 @@
+"use client";
+
+import React, { useState } from "react";
+import { saveComplaintToDb } from "../lib/firebase";
+
+export default function ComplaintForm({ onComplaintAdded }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    complaint: ""
+  });
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [complaintTicket, setComplaintTicket] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const generateTicketId = () => {
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    return `CJP-COMP-2026-${randomDigits}`;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    if (!formData.name.trim()) {
+      setErrorMessage("Please enter your name.");
+      return;
+    }
+    if (!formData.email.trim() || !formData.email.includes("@")) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+    if (!formData.complaint.trim() || formData.complaint.trim().length < 10) {
+      setErrorMessage("Please tell us your frustration (minimum 10 characters).");
+      return;
+    }
+
+    setIsSubmitting(true);
+    const generatedId = generateTicketId();
+
+    const complaintPayload = {
+      name: formData.name.trim().toUpperCase(),
+      email: formData.email.trim(),
+      complaint: formData.complaint.trim(),
+      ticketId: generatedId
+    };
+
+    const result = await saveComplaintToDb(complaintPayload);
+
+    if (result.success) {
+      setComplaintTicket(complaintPayload);
+      setIsSuccess(true);
+      if (typeof onComplaintAdded === "function") {
+        onComplaintAdded();
+      }
+    } else {
+      setErrorMessage("Failed to register complaint. The system is currently too lazy. Try again.");
+    }
+    setIsSubmitting(false);
+  };
+
+  const handleReset = () => {
+    setFormData({ name: "", email: "", complaint: "" });
+    setIsSuccess(false);
+    setComplaintTicket(null);
+    setErrorMessage("");
+  };
+
+  const handlePrint = () => {
+    if (typeof window !== "undefined") {
+      window.print();
+    }
+  };
+
+  if (isSuccess && complaintTicket) {
+    return (
+      <div className="contact-form" style={{ gap: "24px", animation: "fadeIn 0.4s ease-out" }}>
+        <div style={{ textAlign: "center", borderBottom: "1px dashed rgba(26, 17, 8, 0.2)", paddingBottom: "16px" }}>
+          <span className="eyebrow" style={{ color: "var(--blood)", marginBottom: "4px" }}>Venting Registered</span>
+          <h3 className="display" style={{ fontSize: "28px", margin: "4px 0" }}>Frustration <em>Logged.</em></h3>
+          <p className="lead" style={{ fontSize: "14px", margin: "6px 0 0", color: "var(--ink-2)" }}>
+            Thank you for speaking up. Your official complaint receipt is generated below.
+          </p>
+        </div>
+
+        {/* ============ Retro Ticket Receipt ============ */}
+        <div style={{ 
+          background: "#EADFC4", // paper-2 accent background
+          borderTop: "3px dashed var(--ink)",
+          borderBottom: "3px dashed var(--ink)",
+          padding: "24px 20px",
+          fontFamily: "var(--mono), 'JetBrains Mono', monospace",
+          color: "var(--ink)",
+          fontSize: "13px",
+          lineHeight: "1.6",
+          position: "relative",
+          boxShadow: "inset 0 0 10px rgba(0,0,0,0.04)"
+        }}>
+          {/* Saffron accent banner inside ticket */}
+          <div style={{ 
+            border: "1.5px solid var(--ink)",
+            background: "#B84915",
+            color: "#F4EBD7",
+            padding: "4px",
+            textAlign: "center",
+            fontWeight: "700",
+            fontSize: "11px",
+            letterSpacing: "2.5px",
+            textTransform: "uppercase",
+            marginBottom: "20px"
+          }}>
+            Official Rant Record
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px", borderBottom: "1px dotted rgba(26,17,8,0.2)", paddingBottom: "6px" }}>
+            <span style={{ fontWeight: "700" }}>TICKET ID:</span>
+            <span style={{ color: "var(--blood)", fontWeight: "700" }}>{complaintTicket.ticketId}</span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+            <span>FILED BY:</span>
+            <span style={{ fontWeight: "600" }}>{complaintTicket.name}</span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "14px" }}>
+            <span>EMAIL / GMAIL:</span>
+            <span>{complaintTicket.email}</span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
+            <span>TARGET ENTITY:</span>
+            <span style={{ fontWeight: "600", color: "var(--saffron-deep)" }}>CURRENT GOVT</span>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "14px", borderBottom: "1px dotted rgba(26,17,8,0.2)", paddingBottom: "8px" }}>
+            <span>DATE LOGGED:</span>
+            <span>{new Date().toLocaleDateString()}</span>
+          </div>
+
+          <div style={{ marginBottom: "16px" }}>
+            <div style={{ fontWeight: "700", marginBottom: "4px", color: "var(--green)" }}>REGISTERED COMPLAINT:</div>
+            <div style={{ 
+              background: "rgba(244, 235, 215, 0.5)", 
+              border: "1px solid rgba(26, 17, 8, 0.12)",
+              padding: "10px 12px",
+              fontStyle: "italic",
+              fontSize: "12.5px",
+              whiteSpace: "pre-wrap",
+              maxHeight: "180px",
+              overflowY: "auto",
+              color: "var(--ink-2)"
+            }}>
+              "{complaintTicket.complaint}"
+            </div>
+          </div>
+
+          <div style={{ 
+            background: "var(--ink)", 
+            color: "#F4EBD7", 
+            padding: "8px 10px", 
+            textAlign: "center",
+            fontSize: "11px",
+            fontWeight: "700",
+            letterSpacing: "1px"
+          }}>
+            STATUS: PIPED TO ACTIVE ACTION BUREAU
+          </div>
+
+          <p style={{ fontSize: "10.5px", textAlign: "center", color: "var(--ink-3)", marginTop: "16px", fontStyle: "italic", lineHeight: "1.4" }}>
+            Disclaimer: Vanting keeps the swarm resilient. Your rant has been mathematically parsed and safely stored in the Swarm Vault.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", gap: "16px", width: "100%" }}>
+          <button 
+            onClick={handlePrint} 
+            className="btn-primary" 
+            style={{ flex: "1", justifyContent: "center", display: "inline-flex" }}
+          >
+            Print Receipt
+            <span className="arr">⎙</span>
+          </button>
+          <button 
+            onClick={handleReset} 
+            className="btn-link"
+            style={{ borderBottom: "2px dashed var(--ink)", paddingBottom: "2px", fontWeight: "600" }}
+          >
+            File Another Complaint
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="contact-form" style={{ animation: "fadeIn 0.3s ease-out" }}>
+      <div style={{ borderBottom: "1px solid rgba(26, 17, 8, 0.12)", paddingBottom: "14px", marginBottom: "4px" }}>
+        <span className="eyebrow" style={{ color: "var(--blood)" }}>Swarm Complaint Bureau</span>
+        <h3 className="display" style={{ fontSize: "28px", marginTop: "4px" }}>File a Rant / Frustration</h3>
+      </div>
+
+      {errorMessage && (
+        <div style={{ 
+          background: "rgba(139, 26, 26, 0.08)", 
+          color: "var(--blood)", 
+          border: "2px solid var(--blood)",
+          padding: "10px 14px",
+          fontFamily: "var(--mono)",
+          fontSize: "12px",
+          letterSpacing: "0.5px"
+        }}>
+          ⚠ ERROR: {errorMessage}
+        </div>
+      )}
+
+      <label>
+        <span>Your Name *</span>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="e.g. Abhijeet Dipke"
+          disabled={isSubmitting}
+          required
+        />
+      </label>
+
+      <label>
+        <span>Your Email / Gmail Address *</span>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="e.g. swarm@gmail.com"
+          disabled={isSubmitting}
+          required
+        />
+      </label>
+
+      <label>
+        <span>Frustration / Complaint Details (नाम/काम/दाम) *</span>
+        <textarea
+          name="complaint"
+          value={formData.complaint}
+          onChange={handleChange}
+          rows="6"
+          placeholder="State your complaint or absolute frustration with the current government. Unemployed standards, inflation, corruption, general laziness limits... vent it all!"
+          disabled={isSubmitting}
+          style={{ resize: "vertical" }}
+          required
+        />
+      </label>
+
+      <button 
+        type="submit" 
+        className="btn-primary" 
+        style={{ marginTop: "12px", width: "100%", justifyContent: "center", background: "var(--blood)", borderColor: "var(--ink)" }}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "LOGGING YOUR RANT..." : "FILE COMPLAINT & LOG RANT"}
+        <span className="arr">→</span>
+      </button>
+
+      <p className="form-fine" style={{ marginTop: "4px", fontSize: "11px", color: "var(--ink-3)" }}>
+        * By submitting this complaint, you authorize the Cockroach Janta Party to archive your disgruntlement into the official record. We read every word.
+      </p>
+    </form>
+  );
+}
