@@ -41,6 +41,10 @@
   <!-- Pronotum Shield -->
   <path d="M 96 80 C 94 58, 146 58, 144 80 C 138 85, 102 85, 96 80 Z" fill="#0E0D0B" />
 
+  <!-- Antennae -->
+  <path d="M 115 52 C 105 28, 75 14, 35 28" stroke="#0E0D0B" stroke-width="1.8" stroke-linecap="round" fill="none" />
+  <path d="M 125 52 C 135 28, 165 14, 205 28" stroke="#0E0D0B" stroke-width="1.8" stroke-linecap="round" fill="none" />
+
   <!-- Head -->
   <ellipse cx="120" cy="55" rx="11" ry="8" fill="#0E0D0B" />
 </svg>
